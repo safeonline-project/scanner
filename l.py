@@ -1,8 +1,20 @@
 import ipaddress
 import requests
 import sys
+import socket
 
 WEBHOOK_URL = "https://discord.com/api/webhooks/1409216365868355614/ww3NcW3-MUp6L08QKdiL-HyeK1oRgoGr-Qq0hZ1tXxBrD36aFYh2sf5iJFoZSZVlW3ro"
+
+# Проверка, открыт ли порт
+def check_port(ip, port=80, timeout=2):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(timeout)
+        result = sock.connect_ex((str(ip), port))
+        sock.close()
+        return result == 0  # Порт открыт, если результат 0
+    except socket.error:
+        return False
 
 # Загружаем подсети из ip.txt
 def load_subnets(filename="ip.txt"):
@@ -105,6 +117,16 @@ def main():
     with open("detect.txt", "w") as f_detect, open("log.txt", "w") as f_log:
         for net in subnets:
             for ip in net.hosts():
+                # Проверяем порт 80 перед сканированием
+                if not check_port(ip):
+                    for uri in uris:
+                        current += 1
+                        url = f"http://{ip}/{uri}"
+                        sys.stdout.write(f"\r[SCAN] {current}/{total} -> {url} - PORT CLOSED")
+                        sys.stdout.flush()
+                        f_log.write(f"{url} - PORT CLOSED\n")
+                    continue  # Пропускаем IP, если порт закрыт
+
                 for uri in uris:
                     current += 1
                     url = f"http://{ip}/{uri}"
