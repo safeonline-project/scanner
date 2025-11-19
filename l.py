@@ -3,7 +3,8 @@ import requests
 import sys
 import socket
 
-WEBHOOK_URL = "https://discord.com/api/webhooks/1409216365868355614/ww3NcW3-MUp6L08QKdiL-HyeK1oRgoGr-Qq0hZ1tXxBrD36aFYh2sf5iJFoZSZVlW3ro"
+#Discord Webhook
+WEBHOOK_URL = ""
 
 # Проверка, открыт ли порт
 def check_port(ip, port=80, timeout=2):
