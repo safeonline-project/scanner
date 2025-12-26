@@ -960,3 +960,13 @@
 /x32
 /rep.arm5
 /lx32
+/AB4g5/Josho.arm5
+/AB4g5/Josho.arm6
+/AB4g5/Josho.arm7
+/AB4g5/Josho.m68k
+/AB4g5/Josho.mips
+/AB4g5/Josho.mpsl
+/AB4g5/Josho.ppc
+/AB4g5/Josho.sh4
+/AB4g5/Josho.spc
+/AB4g5/Josho.x86
