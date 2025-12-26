@@ -53,7 +53,7 @@ def check_url(url):
             url,
             timeout=5,
             stream=True,
-            headers={"User-Agent": "Mozilla/5.0"}
+            headers={"User-Agent": "Mozilla/5.0 (compatible; Antibotnet/0.1"}
         )
         code = r.status_code
         if code not in (200, 206):
